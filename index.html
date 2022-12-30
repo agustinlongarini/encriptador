@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <title>Encriptador</title>
+</head>
+
+<body style="background-color:#E5E5E5">
+
+    <div class="pagina">
+
+        <div class="logo">
+            <img src="img/Vector.png" alt="logo alura">
+        </div>
+
+        <div class="centro">
+            <form id="miFormulario">
+                <textarea name="texto" placeholder="Ingrese el texto aquí"></textarea>
+                <p><img src="img/Warning.png" alt="cuidado"> Solo letras minusculas y sin acentos</p>
+                <button type="button" id="encriptar" class="encripta mr-4">Encriptar</button>
+                <button type="button" id="desencriptar" class="desencripta">Desencriptar</button>
+            </form>
+        </div>
+
+        <div class="lateral">
+            <div id="notexto">
+                <img class="imagen1" src="img/Muñeco.png" alt="persona buscando">
+                <h3>Ningún mensaje fue encontrado</h3>
+                <p>Ingrese el texto que desea encriptar o desencriptar</p>
+            </div>
+            <textarea readonly class="mt-4" style="display: none" id="nuevotexto"></textarea>
+            <button class="desencripta" type="button" id="copiar" style="display: none">Copiar</button>
+        </div>
+
+    </div>
+
+    <script>
+
+        var formulario = document.getElementById("miFormulario");
+        var boton1 = document.getElementById("encriptar");
+        var boton2 = document.getElementById("desencriptar");
+
+        boton1.addEventListener("click", function(){
+            var texto = formulario.elements.texto.value;
+            var caracteres = texto.split("");
+            var nuevoTexto = "";
+            for(var i=0; i<caracteres.length; i++){
+                switch(caracteres[i]){
+                    case 'a':
+                        nuevoTexto += 'ai'
+                        break;
+                    case 'e':
+                        nuevoTexto += 'enter'
+                        break;
+                    case 'i':
+                        nuevoTexto += 'imes'
+                        break;
+                    case 'o': 
+                        nuevoTexto += 'ober'
+                        break;
+                    case 'u': 
+                        nuevoTexto += 'ufat'
+                        break;
+                        default:
+                    nuevoTexto += caracteres[i];
+            }
+        }
+        document.getElementById("nuevotexto").innerHTML = nuevoTexto;
+        document.getElementById("notexto").style.display = "none";
+        document.getElementById("nuevotexto").style.display = "block";
+        document.getElementById("copiar").style.display = "inline";
+        ajustarTextarea();
+    });
+
+        boton2.addEventListener("click", function(){
+            var texto = formulario.elements.texto.value;
+            var caracteres = texto.split("");
+            var nuevoTexto = "";
+            for(var i=0; i<caracteres.length; i++){
+                switch(caracteres[i]){
+                    case 'a':
+                        nuevoTexto += 'a'
+                        i += 1;
+                        break;
+                    case 'e':
+                        nuevoTexto += 'e'
+                        i += 4;
+                        break;
+                    case 'i':
+                        nuevoTexto += 'i'
+                        i += 3;
+                        break;
+                    case 'o': 
+                        nuevoTexto += 'o'
+                        i += 3;
+                        break;
+                    case 'u': 
+                        nuevoTexto += 'u'
+                        i += 3;
+                        break;
+                    default:
+                        nuevoTexto += caracteres[i];
+                }
+            }
+            document.getElementById("nuevotexto").innerHTML = nuevoTexto;
+            document.getElementById("notexto").style.display = "none";
+            document.getElementById("nuevotexto").style.display = "block";
+            document.getElementById("copiar").style.display = "inline";
+            ajustarTextarea();
+        });
+
+        document.getElementById("copiar").addEventListener("click", function() {
+            var texto = document.getElementById("nuevotexto");
+            texto.select();
+            document.execCommand("copy");
+        });
+
+        function ajustarTextarea() {
+            var textarea = document.getElementById('nuevotexto');
+            textarea.style.height = textarea.scrollHeight + 'px';
+        }
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
+</body>
+</html>
